@@ -1,0 +1,1 @@
+{"version":3,"file":"main.js","mappings":";;;;;AAAA,CAAC,UAASA,CAAC,EAAE;EACbC,KAAK,CAAC,MAAM,CAAC;AACb,CAAC,EAAEC,MAAM,CAAC,C","sources":["webpack://playmotiv-cloud/./src/app/main.js"],"sourcesContent":["(function($) {\r\nalert('jarl')\r\n})(jQuery)"],"names":["$","alert","jQuery"],"sourceRoot":""}
