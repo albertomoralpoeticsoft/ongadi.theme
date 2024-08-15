@@ -1,0 +1,117 @@
+/* SIZES */
+@page {
+  size: 297mm 210mm;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("fonts/Montserrat-Light.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("fonts/Montserrat-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 200;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("fonts/Montserrat-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("fonts/Montserrat-ExtraBold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: "Montserrat";
+  font-weight: 100;
+  line-height: 1em;
+}
+
+H1, H2, H3, H4, H5, H6 {
+  font-weight: 200;
+  margin: 0;
+}
+H1 strong, H2 strong, H3 strong, H4 strong, H5 strong, H6 strong {
+  font-weight: 400;
+}
+
+H3 {
+  margin-bottom: 0.5cm;
+}
+
+.wp-block-group.pagina {
+  background-color: #efefef;
+  height: 17cm;
+  padding: 2cm;
+  box-sizing: border-box;
+  position: relative;
+}
+.wp-block-group.pagina:not(:last-child) {
+  page-break-after: always;
+}
+
+.wp-block-cover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.wp-block-cover .wp-block-cover__image-background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.wp-block-cover .wp-block-cover__inner-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.wp-block-media-text,
+.wp-block-columns {
+  display: table;
+  width: 100%;
+}
+
+.wp-block-media-text__media {
+  display: table-cell;
+  padding-right: 0.5cm;
+}
+
+.wp-block-media-text__content,
+.wp-block-column {
+  display: table-cell;
+}
+
+ol li {
+  position: relative;
+}
+ol li:before {
+  content: "";
+  display: block;
+  height: 54px;
+  width: 54px;
+  border: 2px solid #000;
+  position: absolute;
+  top: 4px;
+  left: -74px;
+}
+
+/*# sourceMappingURL=main.css.map */

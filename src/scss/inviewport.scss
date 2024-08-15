@@ -1,0 +1,26 @@
+.ps-visual {
+
+  transition-delay: 0;
+
+  &.ps-delay-10 { transition-delay: 0.1s; }
+  &.ps-delay-20 { transition-delay: 0.2s; }
+  &.ps-delay-30 { transition-delay: 0.3s; }
+  &.ps-delay-40 { transition-delay: 0.4s; } 
+  &.ps-delay-50 { transition-delay: 0.5s; }
+
+  &.ps-left-zoom {    
+
+    opacity: 0;
+    transform: translateX(-30%) scale(0.9);
+
+    transition-property: opacity, transform;
+    transition-duration: 1s;
+    transition-timing-function: ease-in-out;
+
+    &.ps-in-viewport {
+
+      opacity: 1;
+      transform:  translateX(0) scale(1);
+    }
+  }
+}

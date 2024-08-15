@@ -1,3 +1,11 @@
+import inviewport from './inviewport'
+import flickitygallery from './flickitygallery'
+import flickityhero from './flickityhero'
+
 (function($) {
-alert('jarl')
+
+  inviewport($)
+  flickitygallery($)
+  flickityhero($)
+
 })(jQuery)

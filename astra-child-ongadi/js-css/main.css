@@ -12,5 +12,232 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: astra-child-ongadi
 Template: astra
 */
+figure.shadow {
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 0 4px var(--ast-global-color-2);
+}
+
+.wpcf7 form .wpcf7-response-output {
+  margin: 2em 0 1em;
+  padding: 1em;
+}
+
+.wp-block-group.destacado {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.ast-builder-menu-1 .main-header-menu > .menu-item > .sub-menu,
+.ast-builder-menu-1 .main-header-menu > .menu-item > .astra-full-megamenu-wrapper {
+  margin-top: -1px !important;
+}
+
+.ast-builder-menu-1 .main-header-menu > .menu-item > .sub-menu .menu-item > .menu-link {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.grecaptcha-badge {
+  bottom: 80px !important;
+}
+
+.wp-block-table {
+  margin-bottom: 0;
+}
+.wp-block-table table {
+  margin: 0 !important;
+  margin-block-end: 0;
+  margin-bottom: 0;
+}
+.wp-block-table td, .wp-block-table th {
+  padding: 0.75em;
+}
+
+@media (min-width: 1200px) {
+  .ast-plain-container.ast-no-sidebar #primary {
+    margin-top: 0;
+  }
+}
+.construction-text {
+  width: 80%;
+  max-width: 300px !important;
+}
+
+.wp-block-gallery.slider {
+  height: 50vh;
+  position: relative;
+  margin-bottom: 0;
+}
+.wp-block-gallery.slider .flickity-viewport {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.wp-block-gallery.slider .flickity-viewport .wp-block-image {
+  width: 100% !important; /* full width */
+  height: 100%;
+  margin-right: 10px;
+}
+.wp-block-gallery.slider .flickity-viewport .wp-block-image figcaption {
+  transition-property: transform;
+  transition-duration: 0.5s;
+  transform: translateY(100%);
+}
+.wp-block-gallery.slider .flickity-viewport .wp-block-image:hover figcaption {
+  transform: translateY(0);
+}
+
+.wp-block-group.slider {
+  position: relative;
+  margin-bottom: 0;
+  overflow: hidden;
+}
+.wp-block-group.slider .flickity-viewport {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  max-width: 100% !important;
+  height: 100% !important;
+}
+.wp-block-group.slider .flickity-viewport .flickity-slider .wp-block-cover {
+  width: 100% !important;
+  align-items: flex-end;
+}
+.wp-block-group.slider .flickity-viewport .flickity-slider .wp-block-cover .wp-block-cover__inner-container > .wp-block-group {
+  max-width: 400px;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.ps-hover.ps-scale {
+  transform: scale(1);
+  transition-delay: 0;
+  transition-property: transform;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+.ps-hover.ps-scale:hover {
+  transform: scale(1.1);
+}
+
+.wp-block-button {
+  transform: scale(1);
+  transition-delay: 0;
+  transition-property: transform;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+.wp-block-button:hover:not(:disabled) {
+  transform: scale(1.2);
+}
+
+.ps-visual {
+  transition-delay: 0;
+}
+.ps-visual.ps-delay-10 {
+  transition-delay: 0.1s;
+}
+.ps-visual.ps-delay-20 {
+  transition-delay: 0.2s;
+}
+.ps-visual.ps-delay-30 {
+  transition-delay: 0.3s;
+}
+.ps-visual.ps-delay-40 {
+  transition-delay: 0.4s;
+}
+.ps-visual.ps-delay-50 {
+  transition-delay: 0.5s;
+}
+.ps-visual.ps-left-zoom {
+  opacity: 0;
+  transform: translateX(-30%) scale(0.9);
+  transition-property: opacity, transform;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-out;
+}
+.ps-visual.ps-left-zoom.ps-in-viewport {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+.shortcode.imagebank form {
+  display: flex;
+  align-items: center;
+  margin: 0 0 24px 0;
+}
+.shortcode.imagebank form input.b {
+  margin: 0 16px;
+}
+.motivo {
+  position: relative;
+  overflow: hidden;
+}
+.motivo > * {
+  position: relative;
+  z-index: 1;
+}
+.motivo:before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+}
+.motivo.wp-block-cover > * {
+  z-index: 0;
+}
+.motivo.wp-block-cover:before {
+  z-index: 1;
+}
+.motivo.size-5:before {
+  width: 50%;
+  padding: 0 0 50% 0;
+}
+.motivo.topleft:before {
+  top: 0;
+  left: 0;
+  transform: translateX(-50%) translateY(-50%);
+}
+.motivo.bottomleft:before {
+  bottom: 0;
+  left: 0;
+  transform: translateX(-50%) translateY(50%);
+}
+.motivo.bottomright:before {
+  bottom: 0;
+  right: 0;
+  transform: translateX(50%) translateY(50%);
+}
+.motivo.a:before {
+  background-image: url(/wp-content/themes/astra-child-ongadi/assets/images/motivo-a.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.2;
+}
+.motivo.b:before {
+  background-image: url(/wp-content/themes/astra-child-ongadi/assets/images/motivo-b.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.2;
+}
+.motivo.b.bottomright:before {
+  transform: translateX(55%) translateY(53%);
+}
+.motivo.b.bottomleft:before {
+  transform: translateX(-54%) translateY(54%);
+}
+.motivo.c:before {
+  background-image: url(/wp-content/themes/astra-child-ongadi/assets/images/motivo-c.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.2;
+}
 
 /*# sourceMappingURL=main.css.map*/

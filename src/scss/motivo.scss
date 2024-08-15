@@ -1,0 +1,124 @@
+
+
+.motivo {
+
+  position: relative;
+  overflow: hidden;
+
+  > * {
+
+    position: relative;
+    z-index: 1;
+  }
+
+  &:before {
+
+    content: "";
+    position: absolute;
+    z-index: 0;
+  }
+
+  &.wp-block-cover {
+
+    > * {
+
+      z-index: 0;
+    }
+
+    &:before {
+
+      z-index: 1;
+    }
+  }
+
+  &.size-5 {
+
+    &:before {
+
+      width: 50%;
+      padding: 0 0 50% 0;
+    }
+  }
+
+  &.topleft {    
+
+    &:before {
+
+      top: 0;  
+      left: 0;
+      transform: translateX(-50%) translateY(-50%);      
+    }
+  }
+
+  &.bottomleft {    
+
+    &:before {
+
+      bottom: 0;  
+      left: 0;
+      transform: translateX(-50%) translateY(50%);      
+    }
+  }
+
+  &.bottomright {    
+
+    &:before {
+
+      bottom: 0;  
+      right: 0;
+      transform: translateX(50%) translateY(50%);      
+    }
+  }
+
+  &.a {
+
+    &:before {
+
+      background-image: url("~assets/images/motivo-a.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      opacity: 0.2;
+    }
+  }
+
+  &.b {
+
+    &:before {
+
+      background-image: url("~assets/images/motivo-b.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      opacity: 0.2;
+    }
+
+    &.bottomright {    
+
+      &:before {
+        
+        transform: translateX(55%) translateY(53%);      
+      }
+    }
+
+    &.bottomleft {    
+
+      &:before {
+        
+        transform: translateX(-54%) translateY(54%);     
+      }
+    }
+  }
+
+  &.c {
+
+    &:before {
+
+      background-image: url("~assets/images/motivo-c.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      opacity: 0.2;
+    }
+  }
+}

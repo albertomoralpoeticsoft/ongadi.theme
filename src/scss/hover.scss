@@ -1,0 +1,33 @@
+.ps-hover {
+
+  &.ps-scale {   
+
+    transform: scale(1);
+    transition-delay: 0;    
+    transition-property: transform;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+
+    &:hover {
+
+      transform: scale(1.1);
+    }
+  }
+}
+
+// Buttons
+
+.wp-block-button {  
+
+  transform: scale(1);
+  transition-delay: 0;    
+  transition-property: transform;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+
+  &:hover:not(:disabled) {
+
+    transform: scale(1.2);
+  }
+}
+

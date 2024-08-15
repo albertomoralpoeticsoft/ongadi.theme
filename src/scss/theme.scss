@@ -1,0 +1,69 @@
+figure.shadow {
+
+  border-radius: $space * 0.5;
+  overflow: hidden;
+  box-shadow: 0 0 4px var(--ast-global-color-2); 
+}
+
+.wpcf7 form .wpcf7-response-output {
+
+  margin: 2em 0 1em;
+  padding: 1em;
+}
+
+.wp-block-group.destacado {
+
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.ast-builder-menu-1 
+.main-header-menu 
+> .menu-item 
+> .sub-menu, 
+.ast-builder-menu-1 
+.main-header-menu 
+> .menu-item 
+> .astra-full-megamenu-wrapper {
+
+  margin-top: -1px !important;
+}
+
+.ast-builder-menu-1 
+.main-header-menu 
+> .menu-item 
+> .sub-menu
+.menu-item > .menu-link {
+
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.grecaptcha-badge {
+
+  bottom: $space * 10 !important;
+}
+
+.wp-block-table {
+
+  margin-bottom: 0;
+
+  table {
+    
+    margin: 0 !important;
+    margin-block-end: 0;
+    margin-bottom: 0;
+  }
+
+  td, th {
+    padding: 0.75em;
+  }
+}
+
+@media (min-width: 1200px) {
+
+  .ast-plain-container.ast-no-sidebar #primary {
+
+    margin-top: 0;
+  }
+}
