@@ -11,6 +11,7 @@
 require_once(dirname(__FILE__) . '/cleanhead.php'); 
 require_once(dirname(__FILE__) . '/shortcodes/main.php');
 require_once(dirname(__FILE__) . '/api/main.php');
+require_once(dirname(__FILE__) . '/mail/main.php');
 
 add_filter('xmlrpc_enabled', '__return_false');
 add_filter('login_display_language_dropdown', '__return_false');
@@ -123,11 +124,11 @@ add_action(
       * Tags for media
       */  
     /*
+    */
     register_taxonomy_for_object_type( 
       'post_tag', 
       'attachment' 
     );
-    */
   }
 ); 
 
