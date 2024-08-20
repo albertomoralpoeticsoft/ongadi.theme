@@ -1,0 +1,9 @@
+form#posts-filter 
+select#post_tag 
+option[value="0"],
+form#posts-filter 
+select#post_tag 
+option[value="no_category"]{
+
+  background-color: #e7e7e7;
+}

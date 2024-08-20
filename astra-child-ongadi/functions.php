@@ -37,33 +37,58 @@ add_action(
   }
 );
 
-// Query archive
+/* Query archive */
 
 add_action( 
   'pre_get_posts', 
   function ($q) { 
-      
-    error_log(json_encode($q));
 
     if(
-      !is_admin() // Only target front end queries
-      && $q->is_main_query() // Only target the main query
-      && $q->is_category()   // Only target category archives [comment out if not needed]
-      // && $q->is_tag()        // Only target tag archives [comment out if not needed]
+      is_admin()
+      && $q->is_main_query()
+      && $q->is_tag()
     ) {
       
       $q->set(
         'post_type', 
         [
-          'post', 
-          'page'
+          'attachment'
         ] 
-      );   
+      );
       
-      $q->set('orderby', 'menu_order'); 
-      $q->set('order', 'ASC');
+      $q->set(
+        'tax_query', 
+        null
+      );
+      
+      // error_log('----------------------------------------');
+      // error_log(json_encode($q, JSON_PRETTY_PRINT));
     }
-});
+  }
+);
+
+add_filter( 
+  'request', 
+  function($query_vars) {
+
+    if(
+      is_admin()
+      &&
+      isset($query_vars['post_type'])
+      &&
+      $query_vars['post_type'] == 'attachment'
+      &&
+      isset($query_vars['tag'])
+      &&
+      $query_vars['tag'] == "0"
+    ) {
+      
+      $query_vars['tag'] = "";
+    }
+
+    return $query_vars;
+  }
+);
 
 /**
 * In construction
@@ -81,6 +106,8 @@ add_action(
 
     if(
       (
+        $post
+        &&
         !is_user_logged_in()
         &&
         !has_category('allow-in-construction', $post->ID)
@@ -130,7 +157,28 @@ add_action(
       'attachment' 
     );
   }
-); 
+);    
+
+/**
+ * Admin enqueue
+ */
+
+add_action( 
+	'admin_enqueue_scripts', 
+	function () {
+
+		wp_enqueue_style( 
+			'astra-child-ongadi-theme-css',
+			get_stylesheet_directory_uri() . '/js-css/admin.css', 
+			array(
+        
+      ), 
+			filemtime(get_stylesheet_directory() . '/js-css/admin.css'),
+			'all' 
+		);
+	}, 
+	999 
+);
 
 /**
  * Enqueue styles
@@ -143,7 +191,7 @@ add_action(
     // JS
 
     wp_enqueue_script(
-      'astra-child-noshibari-theme-flickity-js', 
+      'astra-child-ongadi-theme-flickity-js', 
       get_stylesheet_directory_uri() . '/js-css/flickity.pkgd.min.js',
       array(), 
       filemtime(get_stylesheet_directory() . '/js-css/flickity.pkgd.min.js'),
@@ -155,7 +203,7 @@ add_action(
       get_stylesheet_directory_uri() . '/js-css/main.js',
       array(
         'jquery',        
-        'astra-child-noshibari-theme-flickity-js'
+        'astra-child-ongadi-theme-flickity-js'
       ), 
       filemtime(get_stylesheet_directory() . '/js-css/main.js'),
       true
@@ -164,7 +212,7 @@ add_action(
     // CSS
 
 		wp_enqueue_style( 
-			'astra-child-noshibari-theme-flickity-css',
+			'astra-child-ongadi-theme-flickity-css',
 			get_stylesheet_directory_uri() . '/js-css/flickity.css', 
 			array(
         'astra-theme-css'
@@ -177,13 +225,28 @@ add_action(
 			'astra-child-ongadi-theme-css',
 			get_stylesheet_directory_uri() . '/js-css/main.css', 
 			array(
-        'astra-child-noshibari-theme-flickity-css'
+        'astra-child-ongadi-theme-flickity-css'
       ), 
 			filemtime(get_stylesheet_directory() . '/js-css/main.css'),
 			'all' 
 		);
 	}, 
 	999 
+);
+
+add_filter(
+  'gettext', 
+  function($translation, $text, $domain) {
+
+    if($text == 'View all tags') {
+
+      return __('Ver todas');
+    }
+
+    return $translation;
+  }, 
+  30, 
+  3
 );
 
 
