@@ -37,7 +37,83 @@ add_action(
   }
 );
 
-/* Query archive */
+/**
+* In construction
+
+global $post;
+
+add_action(
+  'template_redirect', 
+  function () use ($post){
+
+    if(
+      (
+        $post
+        &&
+        !is_user_logged_in()
+        &&
+        !has_category('allow-in-construction', $post->ID)
+      )
+    ) {
+
+      wp_redirect('/en-construccion'); 
+      exit;
+    }
+  }
+);
+
+*/
+
+/**
+* Init
+*/
+
+add_action( 
+  'init', 
+  function () {
+
+    /**
+      * Categories for pages
+      */  
+
+    register_taxonomy_for_object_type( 
+      'category', 
+      'page' 
+    );
+
+    /**
+      * Categories for media
+      */  
+    /*
+    register_taxonomy_for_object_type( 
+      'category', 
+      'attachment' 
+    );
+    */
+
+    /**
+      * Tags for media
+      */  
+    /*
+    register_taxonomy_for_object_type( 
+      'post_tag', 
+      'attachment' 
+    );
+    */
+
+    /**
+      * Tags for posts
+      */  
+    /*
+    */
+    unregister_taxonomy_for_object_type( 
+      'post_tag', 
+      'post' 
+    );
+  }
+);    
+
+/* Query archive
 
 add_action( 
   'pre_get_posts', 
@@ -90,74 +166,25 @@ add_filter(
   }
 );
 
-/**
-* In construction
 */
 
-/* 
+if (!is_admin()) {
 
-*/
-
-global $post;
-
-add_action(
-  'template_redirect', 
-  function () use ($post){
-
-    if(
-      (
-        $post
-        &&
-        !is_user_logged_in()
-        &&
-        !has_category('allow-in-construction', $post->ID)
-      )
-    ) {
-
-      wp_redirect('/en-construccion'); 
-      exit;
+  add_action( 
+    'pre_get_posts', 
+    function ($wp_query) {
+	
+      if ( 
+        $wp_query->get('category_name') 
+        || 
+        $wp_query->get('cat')
+      ) {
+        
+        $wp_query->set('post_type', ['post','page']);
+      }
     }
-  }
-);
-
-/**
-* Init
-*/
-
-add_action( 
-  'init', 
-  function () {
-
-    /**
-      * Categories for pages
-      */  
-
-    register_taxonomy_for_object_type( 
-      'category', 
-      'page' 
-    );
-
-    /**
-      * Categories for media
-      */  
-    /*
-    register_taxonomy_for_object_type( 
-      'category', 
-      'attachment' 
-    );
-    */
-
-    /**
-      * Tags for media
-      */  
-    /*
-    */
-    register_taxonomy_for_object_type( 
-      'post_tag', 
-      'attachment' 
-    );
-  }
-);    
+  );    
+}
 
 /**
  * Admin enqueue
@@ -232,21 +259,6 @@ add_action(
 		);
 	}, 
 	999 
-);
-
-add_filter(
-  'gettext', 
-  function($translation, $text, $domain) {
-
-    if($text == 'View all tags') {
-
-      return __('Ver todas');
-    }
-
-    return $translation;
-  }, 
-  30, 
-  3
 );
 
 

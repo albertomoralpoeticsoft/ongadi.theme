@@ -12,6 +12,15 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: astra-child-ongadi
 Template: astra
 */
+body.archive .ast-archive-description {
+  padding: 0 0 1em;
+}
+body.archive .site-main .ast-row article .ast-article-inner {
+  padding: 0 0 16px 0;
+  border: solid var(--ast-border-color);
+  border-width: 0 0 1px 0;
+}
+
 figure.shadow {
   border-radius: 4px;
   overflow: hidden;
@@ -59,6 +68,35 @@ figure.shadow {
     margin-top: 0;
   }
 }
+@keyframes headdestacado {
+  from {
+    transform: translateY(-30%) rotate(-5deg) scale(1);
+  }
+  to {
+    transform: translateY(-30%) rotate(-7deg) scale(1.05);
+  }
+}
+.wp-block-group.head-destacado {
+  width: fit-content;
+  box-shadow: 2px 2px 18px rgba(0, 0, 0, 0.5);
+  transform: translateY(-30%) rotate(-5deg);
+  margin-bottom: -64px;
+  z-index: 1;
+  animation-name: headdestacado;
+  animation-duration: 0.9s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+.wp-block-group.head-destacado h3 {
+  font-size: 20px !important;
+}
+@media (max-width: 640px) {
+  .wp-block-group.head-destacado h3 {
+    font-size: 16px !important;
+  }
+}
+
 .construction-text {
   width: 80%;
   max-width: 300px !important;

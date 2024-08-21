@@ -1,3 +1,29 @@
+body.archive {
+  
+  .ast-archive-description {
+
+    padding: 0 0 1em;
+  }
+
+  .site-main {
+
+    .ast-row article {
+
+      .ast-article-inner { 
+
+        padding: 0 0 $space * 2 0;        
+        border: solid var(--ast-border-color);;
+        border-width: 0 0 1px 0;
+      }
+    }
+  }
+}
+
+body.blog {
+
+
+}
+
 figure.shadow {
 
   border-radius: $space * 0.5;
@@ -65,5 +91,46 @@ figure.shadow {
   .ast-plain-container.ast-no-sidebar #primary {
 
     margin-top: 0;
+  }
+}
+
+
+
+@keyframes headdestacado {
+
+  from {
+    transform: translateY(-30%) rotate(-5deg) scale(1);
+  }
+
+  to {
+    transform: translateY(-30%) rotate(-7deg) scale(1.05);
+  }
+}
+
+.wp-block-group.head-destacado {
+  
+  width: fit-content;
+  box-shadow: 2px 2px 18px rgba(0, 0, 0, 0.5);
+  transform: translateY(-30%) rotate(-5deg);
+  margin-bottom: -64px;
+  z-index: 1;
+
+  animation-name: headdestacado;
+  animation-duration: 0.9s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+
+  h3 {
+
+    font-size: 20px !important;
+  }
+
+  @media (max-width: 640px) {    
+
+    h3 {
+
+      font-size: 16px !important;
+    }
   }
 }
