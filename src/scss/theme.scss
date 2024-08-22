@@ -1,3 +1,14 @@
+body:not(.archive) {
+
+  @media (min-width: 1200px) {
+
+    .ast-plain-container.ast-no-sidebar #primary {
+
+      margin-top: 0;
+    }
+  }
+}
+
 body.archive {
   
   .ast-archive-description {
@@ -86,16 +97,6 @@ figure.shadow {
   }
 }
 
-@media (min-width: 1200px) {
-
-  .ast-plain-container.ast-no-sidebar #primary {
-
-    margin-top: 0;
-  }
-}
-
-
-
 @keyframes headdestacado {
 
   from {
@@ -131,6 +132,17 @@ figure.shadow {
     h3 {
 
       font-size: 16px !important;
+    }
+  }
+}
+
+.wp-block-column {
+
+  figure:not(.normal) {
+
+    img {
+
+      width: 100% !important;
     }
   }
 }

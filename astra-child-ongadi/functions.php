@@ -182,6 +182,12 @@ if (!is_admin()) {
         
         $wp_query->set('post_type', ['post','page']);
       }
+
+      if(is_archive()) {
+
+        $wp_query->set( 'orderby', 'menu_order');
+        $wp_query->set( 'order', 'ASC' );
+      }
     }
   );    
 }
