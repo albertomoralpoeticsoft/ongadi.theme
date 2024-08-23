@@ -146,3 +146,19 @@ figure.shadow {
     }
   }
 }
+
+.wp-block-group.visor-pdf {
+
+  .wp-block-file {
+
+    a:not(.wp-element-button) {
+
+      display: none;
+    }
+
+    a.wp-element-button {
+
+      margin-left: 0;
+    }
+  }
+}
