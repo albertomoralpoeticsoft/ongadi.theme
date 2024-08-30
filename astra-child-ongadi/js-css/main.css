@@ -27,6 +27,17 @@ body.archive .site-main .ast-row article .ast-article-inner {
   border-width: 0 0 1px 0;
 }
 
+body.single-post #primary {
+  margin-top: 60px !important;
+  margin-bottom: 60px !important;
+}
+
+@media (min-width: 1200px) {
+  body:not(.single-post) #primary {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
 figure.shadow {
   border-radius: 4px;
   overflow: hidden;

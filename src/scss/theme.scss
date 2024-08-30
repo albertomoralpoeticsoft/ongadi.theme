@@ -30,9 +30,25 @@ body.archive {
   }
 }
 
-body.blog {
+body.single-post {
 
+  #primary {
 
+    margin-top: 60px !important;
+    margin-bottom: 60px !important;
+  }
+}
+
+@media (min-width: 1200px) {  
+
+  body:not(.single-post) {
+    
+    #primary {
+
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
+  }
 }
 
 figure.shadow {
