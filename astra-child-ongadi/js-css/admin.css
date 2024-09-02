@@ -7,3 +7,22 @@ option[value="no_category"]{
 
   background-color: #e7e7e7;
 }
+
+/* PDF Container */
+
+.wp-block.pdf-container > .wp-block {
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.wp-block.pdf-container > .wp-block .embedpress-document-embed,
+.wp-block.pdf-container > .wp-block .embedpress-document-embed .gutenberg-wraper,
+.wp-block.pdf-container > .wp-block .embedpress-document-embed .gutenberg-wraper .gutenberg-pdf-wraper,
+.wp-block.pdf-container > .wp-block .embedpress-document-embed .gutenberg-wraper .gutenberg-pdf-wraper iframe {
+
+  height: 100% !important;
+}

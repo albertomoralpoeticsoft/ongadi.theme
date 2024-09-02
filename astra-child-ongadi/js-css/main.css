@@ -120,6 +120,31 @@ figure.shadow {
   margin-left: 0;
 }
 
+/* PDF Container */
+.wp-block-group.pdf-container .ep-gutenberg-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.wp-block-group.pdf-container .ep-gutenberg-content .embedpress-inner-iframe {
+  height: 100%;
+}
+.wp-block-group.pdf-container .ep-gutenberg-content .embedpress-inner-iframe > div {
+  height: 100%;
+}
+.wp-block-group.pdf-container .ep-gutenberg-content .embedpress-inner-iframe > div .ep-embed-content-wraper {
+  height: 100%;
+}
+.wp-block-group.pdf-container .ep-gutenberg-content .embedpress-inner-iframe > div .ep-embed-content-wraper .gutenberg-pdf-wraper {
+  height: 100%;
+}
+.wp-block-group.pdf-container .ep-gutenberg-content .embedpress-inner-iframe > div .ep-embed-content-wraper .gutenberg-pdf-wraper iframe {
+  height: 100% !important;
+  max-height: none !important;
+}
+
 .construction-text {
   width: 80%;
   max-width: 300px !important;

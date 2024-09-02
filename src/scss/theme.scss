@@ -178,3 +178,39 @@ figure.shadow {
     }
   }
 }
+
+/* PDF Container */
+
+.wp-block-group.pdf-container {
+
+  .ep-gutenberg-content {
+
+    @include absolutebox();
+
+    .embedpress-inner-iframe {
+
+      height: 100%;
+
+      > div {
+
+        height: 100%;
+
+        .ep-embed-content-wraper {
+
+          height: 100%;
+
+          .gutenberg-pdf-wraper {
+
+            height: 100%;
+
+            iframe {
+
+              height: 100% !important;
+              max-height: none !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
