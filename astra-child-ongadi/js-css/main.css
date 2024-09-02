@@ -1,6 +1,7 @@
 /*!*************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/scss/main.scss ***!
   \*************************************************************************************************************/
+@charset "UTF-8";
 /**
 Theme Name: Astra Child OngAdi
 Author: Alberto Moral
@@ -113,13 +114,6 @@ figure.shadow {
   width: 100% !important;
 }
 
-.wp-block-group.visor-pdf .wp-block-file a:not(.wp-element-button) {
-  display: none;
-}
-.wp-block-group.visor-pdf .wp-block-file a.wp-element-button {
-  margin-left: 0;
-}
-
 /* PDF Container */
 .wp-block-group.pdf-container .ep-gutenberg-content {
   position: absolute;
@@ -143,6 +137,11 @@ figure.shadow {
 .wp-block-group.pdf-container .ep-gutenberg-content .embedpress-inner-iframe > div .ep-embed-content-wraper .gutenberg-pdf-wraper iframe {
   height: 100% !important;
   max-height: none !important;
+}
+
+/* Título página */
+.wp-block-cover.titulo-pagina h1 {
+  width: fit-content;
 }
 
 .construction-text {
