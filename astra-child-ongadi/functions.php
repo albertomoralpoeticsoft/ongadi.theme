@@ -200,12 +200,18 @@ add_action(
 	'admin_enqueue_scripts', 
 	function () {
 
+    wp_enqueue_script(
+      'astra-child-ongadi-theme-admin-js', 
+      get_stylesheet_directory_uri() . '/js-css/admin.js',
+      array('jquery'), 
+      filemtime(get_stylesheet_directory() . '/js-css/admin.js'),
+      true
+    );
+
 		wp_enqueue_style( 
-			'astra-child-ongadi-theme-css',
+			'astra-child-ongadi-theme-admin-css',
 			get_stylesheet_directory_uri() . '/js-css/admin.css', 
-			array(
-        
-      ), 
+			array(), 
 			filemtime(get_stylesheet_directory() . '/js-css/admin.css'),
 			'all' 
 		);
