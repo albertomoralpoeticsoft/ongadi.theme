@@ -6,14 +6,41 @@ const themename = 'astra-child-ongadi'
 const destdir = path.join(__dirname, themename)
 const themeplublic = '/wp-content/themes/' + themename
 
-module.exports = env => { 
+module.exports = env => {  
+                                                    
+  const input = Object.keys(env)[2] || ''
+  const params = input.split('-')
 
-  const paths ={
-    entryjs: './src/app/main.js',
-    entryscss: './src/scss/main.scss',
-    output: destdir  + '/js-css',
-    public: themeplublic,
-    cssfilename: 'main.css'
+  const section = params[0] || 'app' // app | block
+  const target = params[1] || ''
+  
+  let paths
+
+  switch(section) {
+
+    case 'app':
+
+      paths ={
+        entryjs: './src/app/main.js',
+        entryscss: './src/app/scss/main.scss',
+        output: destdir  + '/js-css',
+        public: themeplublic,
+        cssfilename: 'main.css'
+      }
+
+      break;
+
+    case 'block':
+
+      paths ={
+        entryjs: './src/block/' + target + '/main.js',
+        entryscss: './src/block/' + target + '/main.scss',
+        output: destdir  + '/block/' + target,
+        public: themeplublic,
+        cssfilename: 'main.css'
+      }
+
+      break;
   }
 
   return {

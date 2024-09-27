@@ -208,3 +208,18 @@ figure.shadow {
     width: fit-content;
   }
 }
+
+/* Query loop */
+
+.wp-block-query {
+
+  ul.wp-block-post-template {
+
+    padding: 0;
+  }
+
+  .wp-block-separator {
+    border: none;
+    border-top: 1px solid;
+  }
+}

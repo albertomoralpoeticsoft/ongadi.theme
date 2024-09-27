@@ -1,0 +1,1 @@
+call webpack --env=block-%1%

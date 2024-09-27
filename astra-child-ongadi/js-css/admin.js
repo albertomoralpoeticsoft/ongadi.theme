@@ -1,4 +1,6 @@
 (function($) { 
+
+  if(!wp.data) { return }
   
   const unsubscribe = wp.data.subscribe(() => {
 

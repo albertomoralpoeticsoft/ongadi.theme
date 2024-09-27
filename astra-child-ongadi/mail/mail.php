@@ -8,10 +8,10 @@ add_action(
     $phpmailer->Host = 'ssl0.ovh.net';
     $phpmailer->SMTPAuth = true;
     $phpmailer->Port = 465;
-    $phpmailer->Username = 'hola@ongadi.org';
-    $phpmailer->Password = 'JsAU8)0000';
+    $phpmailer->Username = 'info@ongadi.org';
+    $phpmailer->Password = 'VayaLio2024!';
     $phpmailer->SMTPSecure = 'ssl';
-    $phpmailer->From = 'hola@ongadi.org';
+    $phpmailer->From = 'info@ongadi.org';
     $phpmailer->FromName = 'ONG ADI';    
     $phpmailer->isHTML(true);
   }

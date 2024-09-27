@@ -200,6 +200,8 @@ add_action(
 	'admin_enqueue_scripts', 
 	function () {
 
+    // Admin scripts - sStyles
+
     wp_enqueue_script(
       'astra-child-ongadi-theme-admin-js', 
       get_stylesheet_directory_uri() . '/js-css/admin.js',
@@ -213,6 +215,26 @@ add_action(
 			get_stylesheet_directory_uri() . '/js-css/admin.css', 
 			array(), 
 			filemtime(get_stylesheet_directory() . '/js-css/admin.css'),
+			'all' 
+		);
+
+    // Blocks
+
+    /* Query Image bank */
+
+    wp_enqueue_script(
+      'astra-child-ongadi-theme-block-imagebank-js', 
+      get_stylesheet_directory_uri() . '/block/imagebank/main.js',
+      array('jquery'), 
+      filemtime(get_stylesheet_directory() . '/block/imagebank/main.js'),
+      true
+    );
+
+		wp_enqueue_style( 
+			'astra-child-ongadi-theme-block-imagebank-css',
+			get_stylesheet_directory_uri() . '/block/imagebank/main.css', 
+			array(), 
+			filemtime(get_stylesheet_directory() . '/block/imagebank/main.css'),
 			'all' 
 		);
 	}, 
