@@ -1,58 +1,294 @@
-// https://developer.wordpress.org/block-editor/how-to-guides/block-tutorial/extending-the-query-loop-block/
-// https://rudrastyh.com/gutenberg/query-loop-block-variation.html
-// https://wpfieldwork.com/modify-query-loop-block-to-filter-by-custom-field/
+import immutableUpdate from 'immutable-update'
+import { times } from 'lodash'
+const { __ } = wp.i18n
+const { registerBlockType } = wp.blocks
+const { 
+  InspectorControls
+} = wp.blockEditor
+const {
+	PanelBody,
+	PanelRow,
+  SelectControl,
+  RangeControl,
+  TextControl,
+  Button
+} = wp.components
+const {
+  useEffect,
+  useReducer
+} = wp.element
+import Highlighter from 'react-highlight-words';
 
-const { registerBlockVariation } = wp.blocks
+const Image = props => {
 
-const ONGADI_IMAGEBANK = 'ongadi/imagebank';
+  return <div className="Image">
+    <div className="Thumb">
+      <img src={ props.guid } />
+    </div>
+    <div className="Title">
+      <Highlighter
+        highlightClassName="Highlight"
+        searchWords={ props.terms }
+        autoEscape={true}
+        textToHighlight={ props.post_title }
+      />
+    </div>
+    <div className="Legend">
+      <Highlighter
+        highlightClassName="Highlight"
+        searchWords={ props.terms }
+        autoEscape={true}
+        textToHighlight={ props.post_excerpt }
+      />
+    </div>
+    <div className="Description">
+      <Highlighter
+        highlightClassName="Highlight"
+        searchWords={ props.terms }
+        autoEscape={true}
+        textToHighlight={ props.post_content }
+      />
+    </div>
+  </div>
+}
 
-registerBlockVariation(
-  'core/query', 
-  {
-    name: ONGADI_IMAGEBANK,
-    title: 'Image Bank',
-    description: 'Displays search of images in File Bird Folders',
-    isActive: ({ 
-      namespace, 
-      query
-    }) => {
+const edit = props => {
 
-      return (
-        namespace === ONGADI_IMAGEBANK
-        && 
-        query.postType === 'attachment'
-      );
-    },
-    icon: 'share',
-    attributes: {
-      namespace: ONGADI_IMAGEBANK,
-      query: {
-        perPage: 10,
-        pages: 6,
-        offset: 0,
-        postType: 'attachment',
-        order: 'desc',
-        orderBy: 'date',
-        author: '',
-        search: '',
-        exclude: [],
-        sticky: '',
-        inherit: false,
-      },
-    },
-    scope: ['inserter'],
-    innerBlocks: [
-      [
-        'core/post-template',
-        {},
-        [ 
-          ['core/post-title'], 
-          ['core/post-excerpt']
-        ],
-      ],
-      [ 'core/query-pagination' ],
-      [ 'core/query-no-results' ],
-    ],
-    allowedControls: ['order'],
+  const [state, dispatch] = useReducer(
+    (state, action) => { 
+
+      const newstate = immutableUpdate(
+        state,
+        action
+      )      
+      
+      return newstate
+    }, 
+    {
+      tree: [],
+      searchtext: 'Legend Leyenda Descripcion',
+      filebirdfolders: '',
+      searching: false,
+      results: {}
+    }
+  )
+
+  const settree = (children, list, level) => {
+
+    if(!list) { list = [] }
+    if(!level) { level = 0 }
+
+    const leveltabs = times(level, () => '-').join('')
+
+    children
+    .forEach(
+      folder => {
+
+        list.push({
+          value: folder.id,
+          label: leveltabs + folder.title
+        })
+
+        if(folder.children) {
+
+          settree(folder.children, list, level + 1)
+        }
+      }
+    )
+
+    dispatch({
+      tree: list
+    })
   }
-);
+
+  const selectfolders = values => {
+
+    dispatch({
+      results: []
+    })
+
+    props.setAttributes({
+      folders: JSON.stringify(values)
+    }) 
+  }
+
+  const setSearchInput = text => {
+
+    dispatch({
+      searchtext: text,
+      results: []
+    })
+  }
+
+  const search = () => {
+
+    dispatch({
+      searching: true
+    })      
+
+    fetch(
+      '/wp-json/ongadi/imagebank/search',
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          text: state.searchtext,
+          folders: state.filebirdfolders
+        })
+      }
+    )
+    .then(response => response.json().then(result => {
+
+      dispatch({
+        searching: false,
+        results: result
+      })
+    }))
+  }
+
+  useEffect(() => {
+
+    dispatch({
+      results: [],
+      filebirdfolders: JSON.parse(props.attributes.folders).join(',')
+    })
+
+  }, [props.attributes.folders])
+
+  useEffect(() => {
+
+    fetch('/wp-json/ongadi/imagebank/folders')
+    .then(response => response.json().then(settree))
+
+  }, [])
+
+  return <div className={`
+    ${ props.className }
+    Edit
+  `}>
+    <div className="Editor"> 
+      <div className="Search">
+        <TextControl
+          placeholder={ __('Search images') }
+          value={ state.searchtext }
+          onChange={ setSearchInput }
+        />
+        <Button 
+          variant="secondary"
+          disabled={
+            !(
+              state.searchtext
+              &&
+              state.searchtext.length > 3
+              &&
+              state.filebirdfolders
+            )
+          }
+          onClick={ search }
+        >
+          Buscar
+        </Button>
+      </div>
+      <div className="Results">
+        {
+          !state.filebirdfolders ?
+          <div className="Message">
+            Select some File Bird Folder
+          </div>
+          :
+          (
+            !state.searchtext
+            ||
+            state.searchtext.length < 3
+          ) ?          
+          <div className="Message">
+            Write text to search
+          </div>
+          :
+          state.searching ?        
+          <div className="Message">
+            Searching
+          </div>
+          :
+          !state.results.posts?.length ?          
+          <div className="Message">
+            No results
+          </div>
+          :
+          <div className="List">
+            <div className="ListMessage">
+              Found { state.results.postcount } in { state.results.attachmentcount } images
+            </div>
+            <div className={`
+              ListPosts
+              Columns_${ props.attributes.columns }
+            `}>
+              {
+                state.results.posts
+                .map(image => <Image { ...image } terms={ state.results.terms }/>)
+              }
+            </div>
+          </div>
+        }
+      </div>    
+    </div>
+    <InspectorControls>
+      <PanelBody 
+        title="Settings" 
+        initialOpen={ true } 
+        className="OngAdi ImageBank InspectorControls"
+      >
+        <PanelRow className="Controls">
+          <div className="FileBirdFolder">
+            <SelectControl
+              label="Search in FileBird Folders"
+              value={ JSON.parse(props.attributes.folders || '[]') }
+              multiple
+              options={ state.tree }
+              onChange={ selectfolders }
+            />
+          </div>
+          <div className="Columns">
+            <RangeControl
+              label="layout Columns"
+              value={ props.attributes.columns }
+              onChange={ 
+                value => props.setAttributes({
+                  columns: value
+                }) 
+              }
+              min={ 2 }
+              max={ 5 }
+            />
+          </div>
+        </PanelRow>
+      </PanelBody>
+    </InspectorControls>
+  </div>
+}
+
+registerBlockType(
+  'ongadi/imagebank',
+  {
+    title: __('Image Bank'),
+    icon: 'format-gallery',
+    category: 'ongadi',
+    attributes: { 
+      folders: {
+        type: 'string',
+        default: '[]'
+      },
+      columns: {
+        type: 'number',
+        default: 3
+      }
+    }, 
+    supports: {
+      align: true
+    },
+    edit: edit
+  }
+)

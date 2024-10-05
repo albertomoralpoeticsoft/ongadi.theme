@@ -2,25 +2,12 @@
 
 add_shortcode(
   'imagebank',
-  function ($atts) {
+  function ($atts, $contentn, $block) {
 
-    return '<div class="shortcode imagebank">
-      <form>
-        <label for"b">Buscar, Cercar</label>
-        <input
-          class="b" 
-          type="text" 
-          name="b" 
-        />
-        <input 
-          class="submit"
-          type="submit" 
-          value="Buscar"
-        />
-      </div>
-      <div class="result">' .
-        $_GET['b'] .
-      '</div>
-    </div>';
+    return '<div class="shortcode imagebank">' .
+
+      json_encode($atts) . $content . json_encode($block) .
+      
+    '</div>';
   }
 );

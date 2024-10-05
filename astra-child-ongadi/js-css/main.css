@@ -260,14 +260,96 @@ figure.shadow {
   transform: translateX(0) scale(1);
 }
 
-.shortcode.imagebank form {
+.wp-block-ongadi-imagebank .Search {
   display: flex;
+  justify-content: center;
   align-items: center;
-  margin: 0 0 24px 0;
 }
-.shortcode.imagebank form input.b {
-  margin: 0 16px;
+.wp-block-ongadi-imagebank .Search input {
+  width: 250px;
+  padding: 4px 8px;
 }
+.wp-block-ongadi-imagebank .Search .wp-block-button {
+  margin: 0 0 0 8px;
+}
+.wp-block-ongadi-imagebank .Search .wp-block-button a.disabled {
+  opacity: 0.5;
+}
+.wp-block-ongadi-imagebank .Results {
+  margin: 16px 0 0 0;
+}
+.wp-block-ongadi-imagebank .Results .Message {
+  min-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wp-block-ongadi-imagebank .Results .List .ListMessage {
+  margin: 8px 0;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-align: right;
+  border: solid #ccc;
+  border-width: 0 0 1px 0;
+  padding: 0 0 8px 0;
+  display: none;
+}
+.wp-block-ongadi-imagebank .Results .List .ListPosts {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0 -5px;
+  font-size: 0.8em;
+}
+.wp-block-ongadi-imagebank .Results .List .ListPosts .Image {
+  padding: 5px 5px 30px;
+  box-sizing: border-box;
+}
+.wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Thumb {
+  width: 100%;
+  padding: 0 0 100% 0;
+  background-color: #ccc;
+  position: relative;
+}
+.wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Thumb img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+.wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Highlight {
+  background-color: var(--ast-global-color-0);
+  display: inline-block;
+  padding: 0 4px;
+  color: #ffffff;
+}
+.wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Title {
+  margin: 8px 0 0 0;
+  font-weight: bold;
+}
+.wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Legend {
+  font-size: 0.8em;
+}
+.wp-block-ongadi-imagebank .Results .List .ListPosts.Columns_2 .Image {
+  width: 50%;
+}
+.wp-block-ongadi-imagebank .Results .List .ListPosts.Columns_3 .Image {
+  width: 33.33%;
+}
+.wp-block-ongadi-imagebank .Results .List .ListPosts.Columns_4 .Image {
+  width: 25%;
+}
+.wp-block-ongadi-imagebank .Results .List .ListPosts.Columns_5 .Image {
+  width: 20%;
+}
+.wp-block-ongadi-imagebank .Results .List .ListPosts:after {
+  content: "";
+  flex: auto;
+}
+
 .motivo {
   position: relative;
   overflow: hidden;

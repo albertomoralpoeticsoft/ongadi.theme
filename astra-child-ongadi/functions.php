@@ -8,6 +8,17 @@
  * @since 1.0.0
  */
 
+function core_log($display) { 
+
+  $text = is_string($display) ? $display : json_encode($display, JSON_PRETTY_PRINT);
+
+  file_put_contents(
+    WP_CONTENT_DIR . '/core_log.txt',
+    $text . PHP_EOL,
+    FILE_APPEND
+  );
+}
+
 require_once(dirname(__FILE__) . '/cleanhead.php'); 
 require_once(dirname(__FILE__) . '/shortcodes/main.php');
 require_once(dirname(__FILE__) . '/api/main.php');
@@ -109,6 +120,45 @@ add_action(
     unregister_taxonomy_for_object_type( 
       'post_tag', 
       'post' 
+    );
+  }
+);        
+
+add_action(
+  'init',
+  function () {
+
+    /**
+    * Dynamic blocks 
+    */
+
+    // Query Image bank 
+
+    require_once(get_stylesheet_directory() . '/block/imagebank/callback.php');
+
+    wp_register_script(
+      'astra-child-ongadi-theme-block-imagebank-js', 
+      get_stylesheet_directory_uri() . '/block/imagebank/main.js',
+      [], 
+      filemtime(get_stylesheet_directory() . '/block/imagebank/main.js'),
+      true
+    );  
+
+    wp_register_style( 
+      'astra-child-ongadi-theme-block-imagebank-css',
+      get_stylesheet_directory_uri() . '/block/imagebank/main.css', 
+      array(), 
+      filemtime(get_stylesheet_directory() . '/block/imagebank/main.css'),
+      'all' 
+    );  
+
+    register_block_type( 
+      'ongadi/imagebank', 
+      [
+        'editor_script' => 'astra-child-ongadi-theme-block-imagebank-js',
+        'style' => 'astra-child-ongadi-theme-block-imagebank-css',
+        'render_callback' => 'astra_child_ongadi_theme_block_imagebank_callback'
+      ]
     );
   }
 );    
@@ -217,28 +267,7 @@ add_action(
 			filemtime(get_stylesheet_directory() . '/js-css/admin.css'),
 			'all' 
 		);
-
-    // Blocks
-
-    /* Query Image bank */
-
-    wp_enqueue_script(
-      'astra-child-ongadi-theme-block-imagebank-js', 
-      get_stylesheet_directory_uri() . '/block/imagebank/main.js',
-      array('jquery'), 
-      filemtime(get_stylesheet_directory() . '/block/imagebank/main.js'),
-      true
-    );
-
-		wp_enqueue_style( 
-			'astra-child-ongadi-theme-block-imagebank-css',
-			get_stylesheet_directory_uri() . '/block/imagebank/main.css', 
-			array(), 
-			filemtime(get_stylesheet_directory() . '/block/imagebank/main.css'),
-			'all' 
-		);
-	}, 
-	999 
+  }
 );
 
 /**
@@ -293,6 +322,29 @@ add_action(
 		);
 	}, 
 	999 
+);
+
+// Blocks category
+
+add_filter(
+  'block_categories_all',
+  function ($categories, $post) {
+
+    return array_merge(
+      $categories,
+      array(
+        array(
+          'slug' => 'ongadi',
+          'title' => __(
+            'ONG ADI',
+            'ongadi' 
+          ),
+        ),
+      )
+    );
+  },
+  10,
+  2
 );
 
 

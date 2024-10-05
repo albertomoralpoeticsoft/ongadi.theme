@@ -75,6 +75,57 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/app/imagebank.js":
+/*!******************************!*\
+  !*** ./src/app/imagebank.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var $image = function $image(data) {
+  return "\n  <div class=\"Image\">\n    <div class=\"Thumb\">\n      <img src=\"https://ongadi.org/wp-content/uploads/2024/06/la-cocinera-50x70-1.jpg\">\n    </div>\n    <div class=\"Title\">\n      <span>\n        <span class=\"\">la coc</span>\n        <mark class=\"Highlight \">in</mark>\n        <span class=\"\">era 50x70</span>\n      </span>\n    </div>\n    <div class=\"Legend\">\n      <span></span>\n    </div>\n    <div class=\"Description\">\n      <span></span>\n    </div>\n  </div>\n  ";
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function ($) {
+  var $imagebank = $('.wp-block-ongadi-imagebank');
+  var $blockattributes = $imagebank.find('#blockattributes');
+  var $search = $imagebank.find('.Search');
+  var $searchinput = $search.find('input');
+  var $searchbutton = $search.find('.wp-block-button a');
+  var $results = $imagebank.find('.Results');
+  var $resultsmessage = $results.find('.Message');
+  var $resultslist = $results.find('.List');
+  var $listmessage = $resultslist.find('.ListMessage');
+  var $listposts = $resultslist.find('.ListPosts');
+  var attributesstr = $blockattributes.text();
+  var cleanjson = attributesstr.split('“').join('"').split('”').join('"');
+  var blockattributes = JSON.parse(cleanjson);
+  var columns = blockattributes.columns;
+  var folders = [];
+  if (blockattributes.folders) {
+    folders = JSON.parse(blockattributes.folders);
+  }
+  $searchinput.on('keyup', function () {
+    var $this = $(this);
+    var text = $this.val();
+    if (text.length > 3) {
+      $searchbutton.removeClass('disabled');
+    } else {
+      $searchbutton.addClass('disabled');
+    }
+  });
+  $searchbutton.on('click', function () {
+    var $this = $(this);
+    if (!$this.hasClass('disabled')) {
+      console.log('active');
+    }
+  });
+});
+
+/***/ }),
+
 /***/ "./src/app/inviewport.js":
 /*!*******************************!*\
   !*** ./src/app/inviewport.js ***!
@@ -189,6 +240,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _inviewport__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./inviewport */ "./src/app/inviewport.js");
 /* harmony import */ var _flickitygallery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./flickitygallery */ "./src/app/flickitygallery.js");
 /* harmony import */ var _flickityhero__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./flickityhero */ "./src/app/flickityhero.js");
+/* harmony import */ var _imagebank__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./imagebank */ "./src/app/imagebank.js");
+
 
 
 
@@ -196,6 +249,7 @@ __webpack_require__.r(__webpack_exports__);
   (0,_inviewport__WEBPACK_IMPORTED_MODULE_0__["default"])($);
   (0,_flickitygallery__WEBPACK_IMPORTED_MODULE_1__["default"])($);
   (0,_flickityhero__WEBPACK_IMPORTED_MODULE_2__["default"])($);
+  (0,_imagebank__WEBPACK_IMPORTED_MODULE_3__["default"])($);
 })(jQuery);
 })();
 

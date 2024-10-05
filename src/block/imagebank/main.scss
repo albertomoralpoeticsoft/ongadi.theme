@@ -1,0 +1,175 @@
+
+/* Editor */
+
+.wp-block-ongadi-imagebank {
+
+  .Editor {
+
+    .Search {
+
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      .components-base-control__field {
+
+        margin-bottom: 0;
+
+        input {
+
+          width: 250px;
+          padding: 17px 16px;
+        }
+      }
+
+      .components-button {
+
+        margin: 0 0 0 8px;
+      }
+    }
+
+    .Results {
+
+      margin: 16px 0 0 0;
+
+      .Message {
+
+        min-height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .List {
+
+        $sep: 10px;
+
+        .ListMessage {
+
+          margin: 8px 0;
+          font-size: 0.8em;
+          font-weight: bold;
+          text-align: right;
+          border: solid #ccc;
+          border-width: 0 0 1px 0;
+          padding: 0 0 8px 0;
+        }
+
+        .ListPosts {
+
+
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          margin: 0 (- $sep * 0.5);
+          font-size: 0.8em;
+
+          .Image {
+
+            padding: $sep * 0.5 $sep * 0.5 $sep * 3;
+            box-sizing: border-box;
+
+            .Thumb {
+
+              width: 100%;
+              padding: 0 0 100% 0;
+              background-color: #ccc;
+              position: relative;
+
+              img {
+
+                display: block;
+                max-width: 100%;
+                max-height: 100%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-50%);
+              }
+            }
+
+            .Highlight {
+
+              background-color: var(--ast-global-color-0);
+              display: inline-block;
+              padding: 0 4px;
+              color: #ffffff;
+            }
+
+            .Title {
+
+              margin: 8px 0 0 0;
+              font-weight: bold;
+            }
+
+            .Legend {
+
+              font-size: 0.8em;
+            }
+
+            .Description {
+            }
+          }
+
+          &.Columns_2 { .Image { width: 50%; } }
+          &.Columns_3 { .Image { width: 33.33% } }
+          &.Columns_4 { .Image { width: 25% } }
+          &.Columns_5 { .Image { width: 20% } }
+
+          &:after {
+
+            content: "";
+            flex: auto;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+/* Controls */
+
+.OngAdi.ImageBank.InspectorControls {
+
+  .h2 {}
+
+  .Controls {
+
+    flex-direction: column;
+    align-items: stretch;
+
+    .FileBirdFolder {
+
+      select.components-select-control__input  {
+
+        height: 200px;
+
+        option {
+
+          width: 100%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          box-sizing: border-box;
+        }
+      }
+    }
+
+    .Columns {
+
+      padding: 0 0 0 8px;
+
+      .components-range-control__root {
+
+        justify-content: space-between;
+        gap: 16px;
+
+        .components-base-control {
+
+          margin: 0 !important;
+        }            
+      }
+    }
+  }
+}
