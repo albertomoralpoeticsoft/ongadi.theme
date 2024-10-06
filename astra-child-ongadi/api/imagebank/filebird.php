@@ -81,7 +81,7 @@ function ongadi_imagebank_search( WP_REST_Request $req ) {
     );
     $searchcolumns = [
       'post_title',
-      'post_excerpt',
+      // 'post_excerpt',
       'post_content'
     ];
 
@@ -91,14 +91,14 @@ function ongadi_imagebank_search( WP_REST_Request $req ) {
 
       foreach($searchlikes as $term) {        
 
-        $searchs[] = "$column LIKE '$term'";
+        $searchs[] = "LOWER($column) LIKE LOWER('$term')";
       }
     }
 
     $sqlsearchs = implode (' OR ', $searchs);
     
     $sql = "
-    SELECT ID, post_title, post_excerpt, post_content, guid
+    SELECT ID, post_title, guid
     FROM {$baseprefix}posts
     WHERE ID IN ($idslist)
     AND (
@@ -106,13 +106,35 @@ function ongadi_imagebank_search( WP_REST_Request $req ) {
     )
     "; 
     $resultposts = $wpdb->get_results($sql);
+    $result = array_map(
+      function($post) {
+
+        $post->thumb = wp_get_attachment_image_url(
+          $post->ID,
+          'medium_large'
+        );
+
+        $postmeta = get_post_meta(
+          $post->ID,
+          '_wp_attachment_metadata',
+          true
+        );
+
+        $post->width = $postmeta['width'];
+        $post->height = $postmeta['height'];
+        $post->size = size_format($postmeta['filesize']);
+
+        return $post;
+      },
+      $resultposts
+    );
 
     $res->set_data([
       // 'search' => $sql, 
       'terms' => $cleansearchtextarray,
       'attachmentcount' => count($ids),
-      'postcount' => count($resultposts),
-      'posts' => $resultposts
+      'postcount' => count($result),
+      'posts' => $result
     ]);
 
   } catch (Exception $e) {

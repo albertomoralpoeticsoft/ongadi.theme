@@ -272,38 +272,40 @@ figure.shadow {
 .wp-block-ongadi-imagebank .Search .wp-block-button {
   margin: 0 0 0 8px;
 }
-.wp-block-ongadi-imagebank .Search .wp-block-button a.disabled {
+.wp-block-ongadi-imagebank .Search .wp-block-button.disabled {
   opacity: 0.5;
 }
 .wp-block-ongadi-imagebank .Results {
   margin: 16px 0 0 0;
 }
 .wp-block-ongadi-imagebank .Results .Message {
-  min-height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
+}
+.wp-block-ongadi-imagebank .Results .Message:empty {
+  display: none;
 }
 .wp-block-ongadi-imagebank .Results .List .ListMessage {
   margin: 8px 0;
   font-size: 0.8em;
-  font-weight: bold;
   text-align: right;
   border: solid #ccc;
   border-width: 0 0 1px 0;
   padding: 0 0 8px 0;
+}
+.wp-block-ongadi-imagebank .Results .List .ListMessage:empty {
   display: none;
 }
 .wp-block-ongadi-imagebank .Results .List .ListPosts {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin: 0 -5px;
+  margin: 0 -7.5px;
   font-size: 0.8em;
 }
 .wp-block-ongadi-imagebank .Results .List .ListPosts .Image {
-  padding: 5px 5px 30px;
+  padding: 7.5px 7.5px 45px;
   box-sizing: border-box;
+  cursor: pointer;
 }
 .wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Thumb {
   width: 100%;
@@ -320,18 +322,50 @@ figure.shadow {
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
-.wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Highlight {
-  background-color: var(--ast-global-color-0);
-  display: inline-block;
-  padding: 0 4px;
-  color: #ffffff;
+.wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Title,
+.wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Legend,
+.wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Description {
+  margin: 8px 0 0 0;
 }
 .wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Title {
-  margin: 8px 0 0 0;
   font-weight: bold;
+  line-height: 1em;
 }
 .wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Legend {
   font-size: 0.8em;
+  line-height: 1.2em;
+  font-style: italic;
+  display: none;
+}
+.wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Description {
+  line-height: 1.1em;
+  display: none;
+}
+.wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Dimensions {
+  font-size: 0.9em;
+  margin: 4px 0 0 0;
+  line-height: 1em;
+  color: var(--ast-global-color-1);
+}
+.wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Dimensions .Width,
+.wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Dimensions .Height {
+  font-weight: bold;
+}
+.wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Dimensions .X,
+.wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Dimensions .Sep {
+  display: inline-block;
+  margin: 0 4px;
+}
+.wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Dimensions .PX {
+  display: inline-block;
+  margin: 0 0 0 4px;
+}
+.wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Size {
+  font-size: 0.9em;
+  font-weight: bold;
+  line-height: 1em;
+  margin: 2px 0 0 0;
+  color: var(--ast-global-color-1);
 }
 .wp-block-ongadi-imagebank .Results .List .ListPosts.Columns_2 .Image {
   width: 50%;
@@ -348,6 +382,33 @@ figure.shadow {
 .wp-block-ongadi-imagebank .Results .List .ListPosts:after {
   content: "";
   flex: auto;
+}
+
+#ImageViewer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#ImageViewer img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}
+#ImageViewer .wp-block-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+#ImageViewer .wp-block-button a {
+  padding: 10px 14px;
 }
 
 .motivo {

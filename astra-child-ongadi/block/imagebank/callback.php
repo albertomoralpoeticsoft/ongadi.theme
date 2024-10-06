@@ -11,9 +11,9 @@ function astra_child_ongadi_theme_block_imagebank_callback(
     '</div>
     <div class="Search">
       <input name="text" />
-      <div class="wp-block-button">
+      <div class="wp-block-button disabled">
         <a 
-          class="wp-block-button__link wp-element-button disabled" 
+          class="wp-block-button__link wp-element-button " 
           href="#"
         >' .  
           __('Buscar') .
@@ -21,15 +21,11 @@ function astra_child_ongadi_theme_block_imagebank_callback(
       </div>
     </div>
     <div class="Results">
-      <div class="Message">
-        Escribe un texto para buscar
-      </div>
+      <div class="Message"></div>
       <div class="List">
-        <div class="ListMessage">
-          Mensaje cuantos de cuantos
-        </div>
-        <div class="ListPosts">
-        </div>
+        <div class="ListMessage"></div>
+        <div class="ListPosts"></div>
       </div>
+    </div>
   </div>';
 }

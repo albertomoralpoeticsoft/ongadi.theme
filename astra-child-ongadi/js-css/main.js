@@ -85,43 +85,133 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-var $image = function $image(data) {
-  return "\n  <div class=\"Image\">\n    <div class=\"Thumb\">\n      <img src=\"https://ongadi.org/wp-content/uploads/2024/06/la-cocinera-50x70-1.jpg\">\n    </div>\n    <div class=\"Title\">\n      <span>\n        <span class=\"\">la coc</span>\n        <mark class=\"Highlight \">in</mark>\n        <span class=\"\">era 50x70</span>\n      </span>\n    </div>\n    <div class=\"Legend\">\n      <span></span>\n    </div>\n    <div class=\"Description\">\n      <span></span>\n    </div>\n  </div>\n  ";
+var gettext = function gettext(text, data) {
+  switch (text) {
+    case 'writesearch':
+      return "Escribe un texto para buscar";
+    case 'resultstats':
+      return "\n      Encontrado \n      <strong>".concat(data.text, "</strong> \n      en \n      <strong>").concat(data.found, "</strong> \n      de \n      <strong>").concat(data.total, "</strong> \n      im\xE1genes\n    ");
+    case 'searching':
+      return "\n      Buscando \n      <strong> ".concat(data.terms, "</strong>\n      ...\n    ");
+    default:
+      break;
+  }
+};
+var image = function image(data) {
+  return "\n  <div \n    class=\"Image\"\n    data-guid=\"".concat(data.guid, "\"\n  >\n    <div class=\"Thumb\">\n      <img src=\"").concat(data.thumb, "\">\n    </div>\n    <div class=\"Title\">\n      ").concat(data.post_title, "\n    </div>\n    <div class=\"Dimensions\">\n      <span class=\"Width\">\n        ").concat(data.width, "\n      </span>\n      <span class=\"X\">\n      x\n      </span>\n      <span class=\"Height\">\n        ").concat(data.height, "\n      </span>\n      <span class=\"PX\">\n      px\n      </span>\n    </div>\n    <div class=\"Size\">\n      ").concat(data.size, "\n    </div>\n  </div>\n  ");
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function ($) {
+  // DOM
+
   var $imagebank = $('.wp-block-ongadi-imagebank');
   var $blockattributes = $imagebank.find('#blockattributes');
   var $search = $imagebank.find('.Search');
   var $searchinput = $search.find('input');
-  var $searchbutton = $search.find('.wp-block-button a');
+  var $searchbutton = $search.find('.wp-block-button');
+  var $searchbuttonlink = $searchbutton.find('a');
   var $results = $imagebank.find('.Results');
   var $resultsmessage = $results.find('.Message');
   var $resultslist = $results.find('.List');
   var $listmessage = $resultslist.find('.ListMessage');
   var $listposts = $resultslist.find('.ListPosts');
+
+  // Block data
+
   var attributesstr = $blockattributes.text();
   var cleanjson = attributesstr.split('“').join('"').split('”').join('"');
   var blockattributes = JSON.parse(cleanjson);
+  console.log();
   var columns = blockattributes.columns;
   var folders = [];
   if (blockattributes.folders) {
-    folders = JSON.parse(blockattributes.folders);
+    folders = JSON.parse(blockattributes.folders).join(',');
   }
+
+  // State
+
+  var setstate = function setstate(action, data) {
+    switch (action) {
+      case 'writing':
+        if (data.text.length > 3) {
+          $searchbutton.removeClass('disabled');
+          $resultsmessage.html('');
+        } else {
+          $searchbutton.addClass('disabled');
+        }
+        break;
+      case 'searching':
+        $resultsmessage.html(gettext('searching', {
+          terms: $searchinput.val()
+        }));
+        $listmessage.html('');
+        $listposts.html('');
+        fetch('/wp-json/ongadi/imagebank/search', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            text: $searchinput.val(),
+            folders: folders
+          })
+        }).then(function (response) {
+          return response.json().then(function (result) {
+            setstate('results', result);
+          });
+        });
+        break;
+      case 'results':
+        $resultsmessage.html('');
+        $listmessage.html(gettext('resultstats', {
+          text: data.terms.join(' '),
+          found: data.postcount,
+          total: data.attachmentcount
+        }));
+        $listposts.attr('class', 'ListPosts Columns_' + columns);
+        $listposts.html(data.posts.map(function (post) {
+          return image(post);
+        }));
+        $listposts.find('.Image').on('click', function () {
+          var guid = $(this).data('guid');
+          setstate('viewimage', guid);
+        });
+        break;
+      case 'viewimage':
+        $('body').append("\n          <div id=\"ImageViewer\">\n            <img src=\"".concat(data, "\" />\n            <div class=\"wp-block-button disabled\">\n              <a \n                class=\"wp-block-button__link wp-element-button \" \n                href=\"#\"\n              >\n                x\n              </a>\n            </div>\n          </div>\n        "));
+        $('html').css('overflow', 'hidden');
+        $('html').scrollTop(0);
+        $('#ImageViewer .wp-block-button').on('click', function () {
+          $('#ImageViewer').remove();
+          $('html').css('overflow', 'auto');
+        });
+        break;
+      default:
+        break;
+    }
+  };
   $searchinput.on('keyup', function () {
-    var $this = $(this);
-    var text = $this.val();
-    if (text.length > 3) {
-      $searchbutton.removeClass('disabled');
-    } else {
-      $searchbutton.addClass('disabled');
+    setstate('writing', {
+      text: $(this).val()
+    });
+  });
+  $searchbuttonlink.on('click', function () {
+    if (!$searchbutton.hasClass('disabled')) {
+      setstate('searching');
     }
   });
-  $searchbutton.on('click', function () {
-    var $this = $(this);
-    if (!$this.hasClass('disabled')) {
-      console.log('active');
-    }
-  });
+
+  // Init 
+
+  if ($searchinput.val()) {
+    // Debug text
+
+    setstate('writing', {
+      text: $searchinput.val()
+    });
+  } else {
+    $resultsmessage.html(gettext('writesearch'));
+  }
 });
 
 /***/ }),

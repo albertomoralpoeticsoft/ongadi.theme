@@ -1,5 +1,4 @@
 import immutableUpdate from 'immutable-update'
-import { times } from 'lodash'
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
 const { 
@@ -17,37 +16,32 @@ const {
   useEffect,
   useReducer
 } = wp.element
-import Highlighter from 'react-highlight-words';
 
 const Image = props => {
 
   return <div className="Image">
     <div className="Thumb">
-      <img src={ props.guid } />
+      <img src={ props.thumb } />
     </div>
     <div className="Title">
-      <Highlighter
-        highlightClassName="Highlight"
-        searchWords={ props.terms }
-        autoEscape={true}
-        textToHighlight={ props.post_title }
-      />
+      { props.post_title }
     </div>
-    <div className="Legend">
-      <Highlighter
-        highlightClassName="Highlight"
-        searchWords={ props.terms }
-        autoEscape={true}
-        textToHighlight={ props.post_excerpt }
-      />
+    <div className="Dimensions">
+      <span className="Width">
+        { props.width }
+      </span>
+      <span className="X">
+      x
+      </span>
+      <span className="Height">
+        { props.height }
+      </span>
+      <span className="PX">
+      px
+      </span>
     </div>
-    <div className="Description">
-      <Highlighter
-        highlightClassName="Highlight"
-        searchWords={ props.terms }
-        autoEscape={true}
-        textToHighlight={ props.post_content }
-      />
+    <div className="Size">
+      { props.size }
     </div>
   </div>
 }
@@ -66,7 +60,7 @@ const edit = props => {
     }, 
     {
       tree: [],
-      searchtext: 'Legend Leyenda Descripcion',
+      searchtext: '',
       filebirdfolders: '',
       searching: false,
       results: {}
@@ -78,7 +72,7 @@ const edit = props => {
     if(!list) { list = [] }
     if(!level) { level = 0 }
 
-    const leveltabs = times(level, () => '-').join('')
+    const leveltabs = [...Array(level).keys()].map(i => ' - ').join('');
 
     children
     .forEach(
@@ -124,7 +118,7 @@ const edit = props => {
 
     dispatch({
       searching: true
-    })      
+    }) 
 
     fetch(
       '/wp-json/ongadi/imagebank/search',
@@ -159,6 +153,13 @@ const edit = props => {
   }, [props.attributes.folders])
 
   useEffect(() => {
+
+    if(!props.attributes.columns) {
+
+      props.setAttributes({
+        columns: 3
+      })
+    }
 
     fetch('/wp-json/ongadi/imagebank/folders')
     .then(response => response.json().then(settree))
@@ -228,7 +229,7 @@ const edit = props => {
             `}>
               {
                 state.results.posts
-                .map(image => <Image { ...image } terms={ state.results.terms }/>)
+                .map(image => <Image { ...image } />)
               }
             </div>
           </div>
@@ -253,12 +254,12 @@ const edit = props => {
           </div>
           <div className="Columns">
             <RangeControl
-              label="layout Columns"
+              label="Layout Columns"
               value={ props.attributes.columns }
               onChange={ 
                 value => props.setAttributes({
                   columns: value
-                }) 
+                })
               }
               min={ 2 }
               max={ 5 }
@@ -282,8 +283,7 @@ registerBlockType(
         default: '[]'
       },
       columns: {
-        type: 'number',
-        default: 3
+        type: 'number'
       }
     }, 
     supports: {

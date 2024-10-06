@@ -121,16 +121,10 @@ add_action(
       'post_tag', 
       'post' 
     );
-  }
-);        
-
-add_action(
-  'init',
-  function () {
 
     /**
-    * Dynamic blocks 
-    */
+    * Dynamic blocks
+    */ 
 
     // Query Image bank 
 
@@ -142,12 +136,12 @@ add_action(
       [], 
       filemtime(get_stylesheet_directory() . '/block/imagebank/main.js'),
       true
-    );  
+    );
 
     wp_register_style( 
       'astra-child-ongadi-theme-block-imagebank-css',
       get_stylesheet_directory_uri() . '/block/imagebank/main.css', 
-      array(), 
+      [],
       filemtime(get_stylesheet_directory() . '/block/imagebank/main.css'),
       'all' 
     );  
@@ -291,10 +285,12 @@ add_action(
     wp_enqueue_script(
       'astra-child-ongadi-theme-js', 
       get_stylesheet_directory_uri() . '/js-css/main.js',
-      array(
+      [
         'jquery',        
-        'astra-child-ongadi-theme-flickity-js'
-      ), 
+        'astra-child-ongadi-theme-flickity-js',
+        'jquery-ui-dialog',
+        'jquery-ui-tooltip'      
+      ], 
       filemtime(get_stylesheet_directory() . '/js-css/main.js'),
       true
     );
