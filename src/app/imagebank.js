@@ -34,6 +34,15 @@ const image = data => {
     <div class="Thumb">
       <img src="${ data.thumb }">
     </div>
+    <div class="wp-block-button Download">
+      <a 
+        class="wp-block-button__link wp-element-button " 
+        href="${ data.guid }"
+        download
+      >
+        Descargar
+      </a>
+    </div>
     <div class="Title">
       ${ data.post_title }
     </div>
@@ -169,7 +178,7 @@ export default $ => {
           )
         )
 
-        $listposts.find('.Image')
+        $listposts.find('.Image .Thumb')
         .on(
           'click',
           function() {

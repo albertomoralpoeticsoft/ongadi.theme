@@ -39,7 +39,7 @@
 
     .List {
 
-      $sep: 15px;
+      $sep: $space * 3;
 
       .ListMessage {
 
@@ -68,7 +68,6 @@
 
           padding: $sep * 0.5 $sep * 0.5 $sep * 3;
           box-sizing: border-box;
-          cursor: pointer;
 
           .Thumb {
 
@@ -76,6 +75,7 @@
             padding: 0 0 100% 0;
             background-color: #ccc;
             position: relative;
+            cursor: pointer;
 
             img {
 
@@ -86,6 +86,18 @@
               top: 50%;
               left: 50%;
               transform: translateX(-50%) translateY(-50%);
+            }
+          }
+
+          .wp-block-button.Download {
+
+            margin: $space * 0.5 0 0 0;
+            text-align: right;
+
+            .wp-block-button__link {
+
+              font-size: 0.8em;
+              padding: $space * 0.5 + 1 $space $space * 0.5;
             }
           }
 

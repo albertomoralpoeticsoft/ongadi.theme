@@ -299,19 +299,19 @@ figure.shadow {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin: 0 -7.5px;
+  margin: 0 -12px;
   font-size: 0.8em;
 }
 .wp-block-ongadi-imagebank .Results .List .ListPosts .Image {
-  padding: 7.5px 7.5px 45px;
+  padding: 12px 12px 72px;
   box-sizing: border-box;
-  cursor: pointer;
 }
 .wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Thumb {
   width: 100%;
   padding: 0 0 100% 0;
   background-color: #ccc;
   position: relative;
+  cursor: pointer;
 }
 .wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Thumb img {
   display: block;
@@ -321,6 +321,14 @@ figure.shadow {
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
+}
+.wp-block-ongadi-imagebank .Results .List .ListPosts .Image .wp-block-button.Download {
+  margin: 4px 0 0 0;
+  text-align: right;
+}
+.wp-block-ongadi-imagebank .Results .List .ListPosts .Image .wp-block-button.Download .wp-block-button__link {
+  font-size: 0.8em;
+  padding: 5px 8px 4px;
 }
 .wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Title,
 .wp-block-ongadi-imagebank .Results .List .ListPosts .Image .Legend,

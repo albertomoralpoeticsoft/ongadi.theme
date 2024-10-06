@@ -98,7 +98,7 @@ var gettext = function gettext(text, data) {
   }
 };
 var image = function image(data) {
-  return "\n  <div \n    class=\"Image\"\n    data-guid=\"".concat(data.guid, "\"\n  >\n    <div class=\"Thumb\">\n      <img src=\"").concat(data.thumb, "\">\n    </div>\n    <div class=\"Title\">\n      ").concat(data.post_title, "\n    </div>\n    <div class=\"Dimensions\">\n      <span class=\"Width\">\n        ").concat(data.width, "\n      </span>\n      <span class=\"X\">\n      x\n      </span>\n      <span class=\"Height\">\n        ").concat(data.height, "\n      </span>\n      <span class=\"PX\">\n      px\n      </span>\n    </div>\n    <div class=\"Size\">\n      ").concat(data.size, "\n    </div>\n  </div>\n  ");
+  return "\n  <div \n    class=\"Image\"\n    data-guid=\"".concat(data.guid, "\"\n  >\n    <div class=\"Thumb\">\n      <img src=\"").concat(data.thumb, "\">\n    </div>\n    <div class=\"wp-block-button Download\">\n      <a \n        class=\"wp-block-button__link wp-element-button \" \n        href=\"").concat(data.guid, "\"\n        download\n      >\n        Descargar\n      </a>\n    </div>\n    <div class=\"Title\">\n      ").concat(data.post_title, "\n    </div>\n    <div class=\"Dimensions\">\n      <span class=\"Width\">\n        ").concat(data.width, "\n      </span>\n      <span class=\"X\">\n      x\n      </span>\n      <span class=\"Height\">\n        ").concat(data.height, "\n      </span>\n      <span class=\"PX\">\n      px\n      </span>\n    </div>\n    <div class=\"Size\">\n      ").concat(data.size, "\n    </div>\n  </div>\n  ");
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function ($) {
   // DOM
@@ -172,7 +172,7 @@ var image = function image(data) {
         $listposts.html(data.posts.map(function (post) {
           return image(post);
         }));
-        $listposts.find('.Image').on('click', function () {
+        $listposts.find('.Image .Thumb').on('click', function () {
           var guid = $(this).data('guid');
           setstate('viewimage', guid);
         });
