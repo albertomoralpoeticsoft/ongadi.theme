@@ -31,7 +31,10 @@ const image = data => {
     class="Image"
     data-guid="${ data.guid }"
   >
-    <div class="Thumb">
+    <div 
+      class="Thumb"
+      data-guid="${ data.guid }"
+    >
       <img src="${ data.thumb }">
     </div>
     <div class="wp-block-button Download">
@@ -186,9 +189,9 @@ export default $ => {
             const guid = $(this).data('guid')
             
             setstate(
-            'viewimage',
-            guid
-          )
+              'viewimage',
+              guid
+            )
 
           }
         )
@@ -212,7 +215,7 @@ export default $ => {
         `)
 
         $('html').css('overflow', 'hidden')
-        $('html').scrollTop(0)  
+        // $('html').scrollTop(0)  
 
         $('#ImageViewer .wp-block-button')
         .on(

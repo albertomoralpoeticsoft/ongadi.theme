@@ -98,7 +98,7 @@ var gettext = function gettext(text, data) {
   }
 };
 var image = function image(data) {
-  return "\n  <div \n    class=\"Image\"\n    data-guid=\"".concat(data.guid, "\"\n  >\n    <div class=\"Thumb\">\n      <img src=\"").concat(data.thumb, "\">\n    </div>\n    <div class=\"wp-block-button Download\">\n      <a \n        class=\"wp-block-button__link wp-element-button \" \n        href=\"").concat(data.guid, "\"\n        download\n      >\n        Descargar\n      </a>\n    </div>\n    <div class=\"Title\">\n      ").concat(data.post_title, "\n    </div>\n    <div class=\"Dimensions\">\n      <span class=\"Width\">\n        ").concat(data.width, "\n      </span>\n      <span class=\"X\">\n      x\n      </span>\n      <span class=\"Height\">\n        ").concat(data.height, "\n      </span>\n      <span class=\"PX\">\n      px\n      </span>\n    </div>\n    <div class=\"Size\">\n      ").concat(data.size, "\n    </div>\n  </div>\n  ");
+  return "\n  <div \n    class=\"Image\"\n    data-guid=\"".concat(data.guid, "\"\n  >\n    <div \n      class=\"Thumb\"\n      data-guid=\"").concat(data.guid, "\"\n    >\n      <img src=\"").concat(data.thumb, "\">\n    </div>\n    <div class=\"wp-block-button Download\">\n      <a \n        class=\"wp-block-button__link wp-element-button \" \n        href=\"").concat(data.guid, "\"\n        download\n      >\n        Descargar\n      </a>\n    </div>\n    <div class=\"Title\">\n      ").concat(data.post_title, "\n    </div>\n    <div class=\"Dimensions\">\n      <span class=\"Width\">\n        ").concat(data.width, "\n      </span>\n      <span class=\"X\">\n      x\n      </span>\n      <span class=\"Height\">\n        ").concat(data.height, "\n      </span>\n      <span class=\"PX\">\n      px\n      </span>\n    </div>\n    <div class=\"Size\">\n      ").concat(data.size, "\n    </div>\n  </div>\n  ");
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function ($) {
   // DOM
@@ -180,7 +180,8 @@ var image = function image(data) {
       case 'viewimage':
         $('body').append("\n          <div id=\"ImageViewer\">\n            <img src=\"".concat(data, "\" />\n            <div class=\"wp-block-button disabled\">\n              <a \n                class=\"wp-block-button__link wp-element-button \" \n                href=\"#\"\n              >\n                x\n              </a>\n            </div>\n          </div>\n        "));
         $('html').css('overflow', 'hidden');
-        $('html').scrollTop(0);
+        // $('html').scrollTop(0)  
+
         $('#ImageViewer .wp-block-button').on('click', function () {
           $('#ImageViewer').remove();
           $('html').css('overflow', 'auto');
