@@ -75,6 +75,9 @@ export default $ => {
   // DOM
 
   const $imagebank = $('.wp-block-ongadi-imagebank')
+
+  if(!$imagebank.length) { return }
+
   const $blockattributes = $imagebank.find('#blockattributes')
   const $search = $imagebank.find('.Search')
   const $searchinput = $search.find('input')
@@ -93,7 +96,6 @@ export default $ => {
   .split('“').join('"')
   .split('”').join('"')
   const blockattributes = JSON.parse(cleanjson)
-  console.log()
   const columns = blockattributes.columns
   let folders = []
   if(blockattributes.folders) {
@@ -215,7 +217,7 @@ export default $ => {
         `)
 
         $('html').css('overflow', 'hidden')
-        // $('html').scrollTop(0)  
+        $('html').scrollTop(0)  
 
         $('#ImageViewer .wp-block-button')
         .on(

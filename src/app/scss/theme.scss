@@ -223,3 +223,12 @@ figure.shadow {
     border-top: 1px solid;
   }
 }
+
+// Column order
+
+@media (max-width: 781px)  {
+
+  .wp-block-column.Columna_1 { order: 1; }
+  .wp-block-column.Columna_2 { order: 2; }
+  .wp-block-column.Columna_3 { order: 3; }
+}

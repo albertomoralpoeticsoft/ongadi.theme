@@ -104,6 +104,9 @@ var image = function image(data) {
   // DOM
 
   var $imagebank = $('.wp-block-ongadi-imagebank');
+  if (!$imagebank.length) {
+    return;
+  }
   var $blockattributes = $imagebank.find('#blockattributes');
   var $search = $imagebank.find('.Search');
   var $searchinput = $search.find('input');
@@ -120,7 +123,6 @@ var image = function image(data) {
   var attributesstr = $blockattributes.text();
   var cleanjson = attributesstr.split('“').join('"').split('”').join('"');
   var blockattributes = JSON.parse(cleanjson);
-  console.log();
   var columns = blockattributes.columns;
   var folders = [];
   if (blockattributes.folders) {
@@ -180,8 +182,7 @@ var image = function image(data) {
       case 'viewimage':
         $('body').append("\n          <div id=\"ImageViewer\">\n            <img src=\"".concat(data, "\" />\n            <div class=\"wp-block-button disabled\">\n              <a \n                class=\"wp-block-button__link wp-element-button \" \n                href=\"#\"\n              >\n                x\n              </a>\n            </div>\n          </div>\n        "));
         $('html').css('overflow', 'hidden');
-        // $('html').scrollTop(0)  
-
+        $('html').scrollTop(0);
         $('#ImageViewer .wp-block-button').on('click', function () {
           $('#ImageViewer').remove();
           $('html').css('overflow', 'auto');
